@@ -1,0 +1,13 @@
+[info]
+name = "myproject"
+isolated = true # if not specified false
+
+[commands]
+#inital = "" # !! only called once while creating the project
+prerun = "npm install"
+startup = "node index.js"
+#after = "npm run build"
+
+
+[specifications]
+max-memory = 512 # if not specified infinite
