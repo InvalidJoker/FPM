@@ -53,6 +53,8 @@ fn main() {
     let command = args.get_command();
     let args = args.get_args();
 
+    // TODO: check if backend is available
+
     match command.as_str() {
         "help" => {
             println!("Help");
