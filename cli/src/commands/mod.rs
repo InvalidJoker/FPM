@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use std::vec;
 
 use crate::cli::ArgParse;
+use crate::connection::Connection;
 
 pub mod help;
 pub mod start;
@@ -11,14 +12,14 @@ pub struct Command {
     name: String,
     description: String,
     aliases: Vec<String>,
-    run: fn(ArgParse),
+    run: fn(ArgParse, Connection),
 }
 impl Command {
     pub fn new(
         name: String,
         description: String,
         aliases: Vec<String>,
-        run: fn(ArgParse),
+        run: fn(ArgParse, Connection),
     ) -> Command {
         Command {
             name,
@@ -40,7 +41,7 @@ impl Command {
         &self.aliases
     }
 
-    pub fn get_run(&self) -> &fn(ArgParse) {
+    pub fn get_run(&self) -> &fn(ArgParse, Connection) {
         &self.run
     }
 }
