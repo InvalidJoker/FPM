@@ -3,13 +3,17 @@ package main
 import "log"
 
 func main() {
+	if err := loadProcesses(); err != nil {
+		panic(err)
+	}
+
 	log.Println("Starting server")
 
-	err := StartServer()
+	err2 := StartServer()
 
-	if err != nil {
-		log.Fatal(err)
+	if err2 != nil {
+		log.Fatal(err2)
 	} else {
-		log.Println("Server started")
+		log.Println("Server closed peacefully")
 	}
 }

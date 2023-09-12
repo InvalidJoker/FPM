@@ -36,6 +36,9 @@ func callback(conn net.Conn) error {
 	case "PING":
 		commands.Ping(conn)
 		break
+	case "START":
+		commands.Start(conn, command)
+		break
 	default:
 		_, err2 := conn.Write([]byte("UNKNOWN COMMAND"))
 		if err2 != nil {
@@ -59,7 +62,10 @@ func StartServer() error {
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	go func() {
 		<-c
-		os.Remove(path)
+		err := os.Remove(path)
+		if err != nil {
+			fmt.Println(err)
+		}
 		os.Exit(0)
 	}()
 
