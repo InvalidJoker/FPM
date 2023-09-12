@@ -34,3 +34,64 @@ impl Ansi {
     pub const HIDDEN: &'static str = "\x1b[8m";
     pub const STRIKETHROUGH: &'static str = "\x1b[9m";
 }
+
+// ------------------------------ WARNING: Ugly macros incoming ------------------------------
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! _color_output {
+    ($tag:expr, $color:expr, $text:expr, $stderr:expr) => {
+        match $stderr {
+            true => eprintln!(
+                "{}{}[{}]{} {}{}{}",
+                $crate::utils::Ansi::BOLD,
+                $color.fg,
+                $tag,
+                $crate::utils::Ansi::RESET,
+                $crate::utils::Ansi::BOLD,
+                $text,
+                $crate::utils::Ansi::RESET
+            ),
+            false => println!(
+                "{}{}[{}]{} {}{}{}",
+                $crate::utils::Ansi::BOLD,
+                $color.fg,
+                $tag,
+                $crate::utils::Ansi::RESET,
+                $crate::utils::Ansi::BOLD,
+                $text,
+                $crate::utils::Ansi::RESET
+            ),
+        }
+    };
+}
+
+#[macro_export]
+macro_rules! info {
+    ($($arg:tt)*) => {
+        _color_output!("INFORMATION", $crate::utils::Ansi::GREEN, format_args!($($arg)*), false);
+    };
+}
+
+#[macro_export]
+macro_rules! warn {
+    ($($arg:tt)*) => {
+        _color_output!("WARNING", $crate::utils::Ansi::YELLOW, format_args!($($arg)*), false);
+    };
+}
+
+#[macro_export]
+macro_rules! error {
+    ($($arg:tt)*) => {
+        _color_output!("ERROR", $crate::utils::Ansi::RED, format_args!($($arg)*), true)
+    };
+}
+
+#[macro_export]
+macro_rules! throw {
+    ($($arg:tt)*) => {
+        error!("{}", format_args!($($arg)*));
+        
+        std::process::exit(1);
+    };
+}
