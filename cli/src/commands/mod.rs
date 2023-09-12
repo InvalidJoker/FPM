@@ -12,6 +12,7 @@ pub struct Command {
     name: String,
     description: String,
     aliases: Vec<String>,
+    // can be fn(ArgParse) for help cmd or fn(ArgParse, Connection) for other cmds
     run: fn(ArgParse, Connection),
 }
 impl Command {

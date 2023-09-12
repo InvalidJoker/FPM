@@ -14,7 +14,7 @@ fn main() {
             (cmd.get_run())(args, conn);
         }
         None => {
-            throw!("Command not found: {}", args.get_command());
+            throw!("Command not found: {} (try 'help')", args.get_command());
         }
     }
 }
