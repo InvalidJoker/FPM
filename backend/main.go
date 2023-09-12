@@ -1,24 +1,15 @@
 package main
 
-import (
-	"github.com/InvalidJokerDE/fpm/services"
-	"github.com/InvalidJokerDE/fpm/utils"
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/websocket/v2"
-	"log"
-)
+import "log"
 
 func main() {
-	log.Println("Starting FPM backend...")
+	log.Println("Starting server")
 
-	socketService := utils.Socket{
-		Clients: map[string]*websocket.Conn{},
+	err := StartServer()
+
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		log.Println("Server started")
 	}
-
-	backendService := services.BackendService{
-		Server: fiber.New(),
-		Socket: &socketService,
-	}
-
-	backendService.Init()
 }
