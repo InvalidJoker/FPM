@@ -32,11 +32,6 @@ func callback(conn net.Conn) error {
 		return nil
 	}
 
-	fmt.Printf("data: \"%s\"\n", data)
-	fmt.Printf("command[0]: \"%s\"\n", command[0])
-	fmt.Printf("\"%s\"\n", command[0])
-	fmt.Println(strings.ToUpper(strings.TrimSpace(command[0])) == "ping")
-
 	switch strings.ToUpper(strings.TrimSpace(command[0])) {
 	case "PING":
 		commands.Ping(conn)
