@@ -1,14 +1,23 @@
 use std::io::prelude::*;
 use std::net::TcpStream;
 
+use crate::{_color_output, error};
+
 pub struct Connection {
     stream: TcpStream,
 }
 impl Connection {
     pub fn new(ip: &str) -> Connection {
-        let stream = TcpStream::connect(ip)
-            .unwrap_or_else(|error| panic!("Failed to connect to server: {}", error));
-        Connection { stream }
+        let stream = TcpStream::connect(ip);
+
+        // check if connection was successful
+        if stream.is_err() {
+            error!("Failed to connect to the backend");
+        }
+
+        Connection {
+            stream: stream.unwrap(),
+        }
     }
 
     pub fn send(&mut self, data: &str) {
