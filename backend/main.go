@@ -3,7 +3,7 @@ package main
 import "log"
 
 func main() {
-	if err := loadProcesses(); err != nil {
+	if err := LoadProcesses(); err != nil {
 		panic(err)
 	}
 
