@@ -7,7 +7,6 @@ First off, thank you for taking the time to contribute! 😄
 
 ### Backend
 - [Go](https://golang.org/)
-- [Fiber](https://gofiber.io/)
 
 ### Frontend
 - [Svelte](https://svelte.dev/)
