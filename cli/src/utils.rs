@@ -131,14 +131,7 @@ macro_rules! warn {
 #[macro_export]
 macro_rules! error {
     ($($arg:tt)*) => {
-        _color_output!("ERROR", $crate::utils::Ansi::RED, format_args!($($arg)*), true)
-    };
-}
-
-#[macro_export]
-macro_rules! throw {
-    ($($arg:tt)*) => {
-        error!("{}", format_args!($($arg)*));
+        _color_output!("ERROR", $crate::utils::Ansi::RED, format_args!($($arg)*), true);
 
         std::process::exit(1);
     };

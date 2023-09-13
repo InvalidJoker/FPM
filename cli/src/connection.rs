@@ -4,7 +4,6 @@ use std::net::TcpStream;
 pub struct Connection {
     stream: TcpStream,
 }
-
 impl Connection {
     pub fn new(ip: &str) -> Connection {
         let stream = TcpStream::connect(ip)

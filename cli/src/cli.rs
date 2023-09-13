@@ -1,4 +1,4 @@
-use crate::{_color_output, error, throw};
+use crate::{_color_output, error};
 
 #[derive(Debug)]
 pub struct ArgParse {
@@ -13,7 +13,7 @@ impl ArgParse {
         let command = match args.get(1) {
             Some(command) => command.to_string(),
             None => {
-                throw!("No command provided");
+                error!("No command provided");
             }
         };
 
