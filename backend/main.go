@@ -1,15 +1,20 @@
 package main
 
-import "log"
+import (
+	"log"
+
+	"github.com/InvalidJokerDE/fpm/services"
+	"github.com/InvalidJokerDE/fpm/utils"
+)
 
 func main() {
-	if err := LoadProcesses(); err != nil {
+	if err := utils.LoadProcesses(); err != nil {
 		panic(err)
 	}
 
 	log.Println("Starting server")
 
-	err2 := StartServer()
+	err2 := services.StartServer()
 
 	if err2 != nil {
 		log.Fatal(err2)

@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"encoding/json"
@@ -23,31 +23,29 @@ type Process struct {
 var Processes map[int]Process
 
 func getProcessFile() (string, error) {
-	directory, err := Exists("~/.fpm")
+	directory, err := Exists("../~/.fpm")
 
 	if err != nil {
 		return "", err
 	}
 
-	if directory == false && err == nil {
-		err2 := os.MkdirAll("~/.fpm", os.ModePerm)
+	if !directory && err == nil {
+		err2 := os.MkdirAll("../~/.fpm", os.ModePerm)
 
 		if err2 != nil {
 			return "", err2
 		}
 	}
 
-	file, err2 := Exists("~/.fpm/processes.json")
+	file, err2 := Exists("../~/.fpm/processes.json")
 
 	if err2 != nil {
 		return "", err2
 	}
 
-	fmt.Println(file)
-
-	if file == false && err2 == nil {
+	if !file && err2 == nil {
 		fmt.Println("Creating processes.json")
-		f, err3 := os.Create("~/.fpm/processes.json")
+		f, err3 := os.Create("../~/.fpm/processes.json")
 
 		if err3 != nil {
 			return "", err3
@@ -64,7 +62,7 @@ func getProcessFile() (string, error) {
 		return "{\"processes\":[]}", nil
 	} else {
 		fmt.Println("Reading processes.json")
-		body, err3 := os.ReadFile("~/.fpm/processes.json")
+		body, err3 := os.ReadFile("../~/.fpm/processes.json")
 
 		if err3 != nil {
 			return "", err3

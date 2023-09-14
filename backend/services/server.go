@@ -1,13 +1,14 @@
-package main
+package services
 
 import (
 	"fmt"
-	"github.com/InvalidJokerDE/fpm/commands"
 	"net"
 	"os"
 	"os/signal"
 	"strings"
 	"syscall"
+
+	"github.com/InvalidJokerDE/fpm/commands"
 )
 
 func callback(conn net.Conn) error {
@@ -35,17 +36,13 @@ func callback(conn net.Conn) error {
 	switch strings.ToUpper(strings.TrimSpace(command[0])) {
 	case "PING":
 		commands.Ping(conn)
-		break
 	case "START":
 		commands.Start(conn, command)
-		break
 	default:
 		_, err2 := conn.Write([]byte("UNKNOWN COMMAND"))
 		if err2 != nil {
 			return err2
 		}
-
-		break
 	}
 
 	return nil
