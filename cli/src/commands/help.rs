@@ -1,4 +1,4 @@
-use crate::{_color_output, cli::ArgParse, connection::Connection, info, error};
+use crate::{_color_output, cli::ArgParse, utils::connection::Connection, info, error};
 
 pub fn run(args: ArgParse, _: Connection) {
     // get all commands

@@ -92,23 +92,23 @@ macro_rules! _color_output {
         match $stderr {
             true => eprintln!(
                 "{}{}[{}]{} {}{}{}",
-                $crate::utils::Ansi::BOLD,
+                $crate::utils::logs::Ansi::BOLD,
                 $color.fg,
                 $tag,
-                $crate::utils::Ansi::RESET,
-                $crate::utils::Ansi::BOLD,
+                $crate::utils::logs::Ansi::RESET,
+                $crate::utils::logs::Ansi::BOLD,
                 $text,
-                $crate::utils::Ansi::RESET
+                $crate::utils::logs::Ansi::RESET
             ),
             false => println!(
                 "{}{}[{}]{} {}{}{}",
-                $crate::utils::Ansi::BOLD,
+                $crate::utils::logs::Ansi::BOLD,
                 $color.fg,
                 $tag,
-                $crate::utils::Ansi::RESET,
-                $crate::utils::Ansi::BOLD,
+                $crate::utils::logs::Ansi::RESET,
+                $crate::utils::logs::Ansi::BOLD,
                 $text,
-                $crate::utils::Ansi::RESET
+                $crate::utils::logs::Ansi::RESET
             ),
         }
     };
@@ -117,21 +117,21 @@ macro_rules! _color_output {
 #[macro_export]
 macro_rules! info {
     ($($arg:tt)*) => {
-        _color_output!("INFORMATION", $crate::utils::Ansi::GREEN, format_args!($($arg)*), false);
+        _color_output!("INFORMATION", $crate::utils::logs::Ansi::GREEN, format_args!($($arg)*), false);
     };
 }
 
 #[macro_export]
 macro_rules! warn {
     ($($arg:tt)*) => {
-        _color_output!("WARNING", $crate::utils::Ansi::YELLOW, format_args!($($arg)*), false);
+        _color_output!("WARNING", $crate::utils::logs::Ansi::YELLOW, format_args!($($arg)*), false);
     };
 }
 
 #[macro_export]
 macro_rules! error {
     ($($arg:tt)*) => {
-        _color_output!("ERROR", $crate::utils::Ansi::RED, format_args!($($arg)*), true);
+        _color_output!("ERROR", $crate::utils::logs::Ansi::RED, format_args!($($arg)*), true);
 
         std::process::exit(1);
     };

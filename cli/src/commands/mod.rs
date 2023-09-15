@@ -2,7 +2,7 @@ use std::collections::HashMap;
 use std::vec;
 
 use crate::cli::ArgParse;
-use crate::connection::Connection;
+use crate::utils::connection::Connection;
 
 pub mod help;
 pub mod start;

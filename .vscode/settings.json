@@ -6,6 +6,7 @@
     ".\\Cargo.toml",
     ".\\cli\\Cargo.toml",
     ".\\cli\\Cargo.toml",
+    ".\\cli\\Cargo.toml",
     ".\\cli\\Cargo.toml"
   ]
 }
