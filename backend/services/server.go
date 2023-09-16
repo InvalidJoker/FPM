@@ -33,11 +33,19 @@ func callback(conn net.Conn) error {
 		return nil
 	}
 
+	// check arguments
+
+	var args []string = []string{}
+
+	if len(command) > 1 {
+		args = command[1:]
+	}
+
 	switch strings.ToUpper(strings.TrimSpace(command[0])) {
 	case "PING":
 		commands.Ping(conn)
 	case "START":
-		commands.Start(conn, command)
+		commands.Start(conn, args)
 	default:
 		_, err2 := conn.Write([]byte("UNKNOWN COMMAND"))
 		if err2 != nil {
