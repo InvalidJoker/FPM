@@ -1,8 +1,10 @@
 use std::collections::HashMap;
 use std::vec;
 
-use crate::cli::ArgParse;
-use crate::utils::connection::Connection;
+use crate::{
+    cli::ArgParse,
+    utils::connection::Connection,
+};
 
 pub mod help;
 pub mod start;

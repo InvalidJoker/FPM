@@ -1,4 +1,7 @@
-use crate::{_color_output, error};
+use crate::{
+    _color_output,
+    error
+};
 
 #[derive(Debug)]
 pub struct ArgParse {

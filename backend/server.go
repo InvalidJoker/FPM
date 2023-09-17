@@ -1,4 +1,4 @@
-package services
+package main
 
 import (
 	"fmt"
@@ -33,24 +33,19 @@ func callback(conn net.Conn) error {
 		return nil
 	}
 
-	// check arguments
-
-	var args []string = []string{}
-
-	if len(command) > 1 {
-		args = command[1:]
-	}
-
 	switch strings.ToUpper(strings.TrimSpace(command[0])) {
 	case "PING":
 		commands.Ping(conn)
+		break
 	case "START":
-		commands.Start(conn, args)
+		commands.Start(conn, command[1:])
+		break
 	default:
 		_, err2 := conn.Write([]byte("UNKNOWN COMMAND"))
 		if err2 != nil {
 			return err2
 		}
+		break
 	}
 
 	return nil
@@ -64,7 +59,7 @@ func StartServer() error {
 	}
 
 	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM, syscall.SIGQUIT)
 	go func() {
 		<-c
 		err := os.Remove(path)
