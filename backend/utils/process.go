@@ -16,36 +16,41 @@ type Process struct {
 	Args      []string `json:"args"`
 	Runtime   string   `json:"runtime"`
 	Mainfile  string   `json:"mainfile"`
-	Rootdir   string   `json:"rootdir"`
+	Cwd       string   `json:"cwd"`
 	IsRunning bool     `json:"isRunning"`
 }
 
-var Processes map[int]Process
+var Processes map[string]Process
 
 func getProcessFile() (string, error) {
-	directory, err := Exists("../~/.fpm")
+	rootDir, errr := os.UserConfigDir()
+
+	if errr != nil {
+		return "", errr
+	}
+
+	directory, err := Exists(fmt.Sprintf("%s/fpm/", rootDir))
 
 	if err != nil {
 		return "", err
 	}
 
 	if !directory && err == nil {
-		err2 := os.MkdirAll("../~/.fpm", os.ModePerm)
+		err2 := os.MkdirAll(fmt.Sprintf("%s/fpm/", rootDir), os.ModePerm)
 
 		if err2 != nil {
 			return "", err2
 		}
 	}
 
-	file, err2 := Exists("../~/.fpm/processes.json")
+	file, err2 := Exists(fmt.Sprintf("%s/fpm/processes.json", rootDir))
 
 	if err2 != nil {
 		return "", err2
 	}
 
 	if !file && err2 == nil {
-		fmt.Println("Creating processes.json")
-		f, err3 := os.Create("../~/.fpm/processes.json")
+		f, err3 := os.Create(fmt.Sprintf("%s/fpm/processes.json", rootDir))
 
 		if err3 != nil {
 			return "", err3
@@ -61,8 +66,7 @@ func getProcessFile() (string, error) {
 
 		return "{\"processes\":[]}", nil
 	} else {
-		fmt.Println("Reading processes.json")
-		body, err3 := os.ReadFile("../~/.fpm/processes.json")
+		body, err3 := os.ReadFile(fmt.Sprintf("%s/fpm/processes.json", rootDir))
 
 		if err3 != nil {
 			return "", err3
@@ -86,10 +90,10 @@ func LoadProcesses() error {
 		return err
 	}
 
-	finalList := make(map[int]Process)
+	finalList := make(map[string]Process)
 
 	for _, process := range _json.Processes {
-		finalList[process.ID] = process
+		finalList[process.Name] = process
 	}
 
 	Processes = finalList
