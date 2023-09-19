@@ -6,6 +6,15 @@ import (
 	"os"
 )
 
+type Args struct {
+	Name      string
+	Autostart bool
+	Maxmem    int
+	Prerun    string
+	Command   string
+	After     string
+}
+
 type jsonProcess struct {
 	Processes []Process `json:"processes"`
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/InvalidJokerDE/fpm/utils"
 	"net"
 	"os"
 	"os/signal"
@@ -33,12 +34,26 @@ func callback(conn net.Conn) error {
 		return nil
 	}
 
+	args, errrr := utils.ParseArgs(command[1:])
+
+	if errrr != "" {
+		_, err2 := conn.Write([]byte(errrr))
+		if err2 != nil {
+			return err2
+		}
+
+		return nil
+	}
+
 	switch strings.ToUpper(strings.TrimSpace(command[0])) {
 	case "PING":
 		commands.Ping(conn)
 		break
 	case "START":
-		commands.Start(conn, command[1:])
+		err2 := commands.Start(conn, args)
+		if err2 != nil {
+			return err2
+		}
 		break
 	default:
 		_, err2 := conn.Write([]byte("UNKNOWN COMMAND"))

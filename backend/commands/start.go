@@ -5,6 +5,6 @@ import (
 	"net"
 )
 
-func Start(conn net.Conn, args []string) {
-	conn.Write([]byte(utils.Processes[args[0]].Mainfile))
+func Start(conn net.Conn, args utils.Args) error {
+	return nil
 }

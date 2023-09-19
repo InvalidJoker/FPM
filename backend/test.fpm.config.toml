@@ -1,12 +1,9 @@
 [info]
 name = "test"
+autostart = true # Start on system boot
+maxmemory = 512 # If value is 0, no memory limit will be set
 
 [commands]
-#inital = "" # !! only called once while creating the project
 prerun = "npm install"
 startup = "node index.js"
-#after = "npm run build"
-
-
-[specifications]
-maxmemory = 512 # if not specified infinite
+after = "echo 'Process finished with exit code $?'"
