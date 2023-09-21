@@ -8,11 +8,12 @@ import (
 
 type Args struct {
 	Name      string
-	Autostart bool
+	AutoStart bool
 	Maxmem    int
 	Prerun    string
 	Command   string
 	After     string
+	Cwd       string
 }
 
 type jsonProcess struct {
@@ -20,13 +21,15 @@ type jsonProcess struct {
 }
 
 type Process struct {
-	ID        int      `json:"id"`
-	Name      string   `json:"name"`
-	Args      []string `json:"args"`
-	Runtime   string   `json:"runtime"`
-	Mainfile  string   `json:"mainfile"`
-	Cwd       string   `json:"cwd"`
-	IsRunning bool     `json:"isRunning"`
+	ID        int    `json:"id"`
+	Name      string `json:"name"`
+	Maxmem    int    `json:"maxmem"`
+	Prerun    string `json:"prerun"`
+	Command   string `json:"command"`
+	After     string `json:"after"`
+	Cwd       string `json:"cwd"`
+	IsRunning bool   `json:"isRunning"`
+	AutoStart bool   `json:"autostart"`
 }
 
 var Processes map[string]Process

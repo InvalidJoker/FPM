@@ -12,16 +12,6 @@ func main() {
 		panic(err)
 	}
 
-	utils.Processes["Hallo"] = utils.Process{
-		ID:        0,
-		Name:      "Hallo",
-		Mainfile:  "/mnt/data/kotin/go/FPM/backend/main.go",
-		Args:      []string{},
-		IsRunning: false,
-		Cwd:       "/mnt/data/kotin/go/FPM/backend/",
-		Runtime:   "",
-	}
-
 	log.Println("Starting server")
 
 	err2 := StartServer()

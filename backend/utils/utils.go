@@ -105,7 +105,7 @@ func ParseArgs(args []string) (Args, string) {
 			}
 		case v == "-s":
 			if DoesNextIndexExists(args, i+1) {
-				a.Autostart = StringBoolToBool(args[i+1])
+				a.AutoStart = StringBoolToBool(args[i+1])
 				skipNext = true
 			} else {
 				return a, "NO AUTOSTART"
@@ -158,6 +158,13 @@ func ParseArgs(args []string) (Args, string) {
 			if IsLastIndex(args, i+1) {
 				break
 			}
+		case v == "-w":
+			if DoesNextIndexExists(args, i+1) {
+				a.Cwd = args[i+1]
+				skipNext = true
+			} else {
+				return a, "NO CWD"
+			}
 		default:
 			return a, "UNKNOWN ARGUMENT"
 		}
@@ -165,4 +172,21 @@ func ParseArgs(args []string) (Args, string) {
 	}
 
 	return a, ""
+}
+
+func GetID() int {
+	var id int
+
+	for _, v := range Processes {
+		if v.ID > id {
+			id = v.ID
+		}
+	}
+
+	return id + 1
+}
+
+func RunProcess(proc *Process) {
+	proc.IsRunning = true
+
 }
