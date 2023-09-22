@@ -32,7 +32,7 @@ type Process struct {
 	AutoStart bool   `json:"autostart"`
 }
 
-var Processes map[string]Process
+var Processes map[string]*Process
 
 func getProcessFile() (string, error) {
 	rootDir, errr := os.UserConfigDir()
@@ -102,10 +102,10 @@ func LoadProcesses() error {
 		return err
 	}
 
-	finalList := make(map[string]Process)
+	finalList := make(map[string]*Process)
 
 	for _, process := range _json.Processes {
-		finalList[process.Name] = process
+		finalList[process.Name] = &process
 	}
 
 	Processes = finalList

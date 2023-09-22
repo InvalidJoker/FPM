@@ -30,7 +30,7 @@ func IsOnlyInt(s string) bool {
 func GetProcessByID(id int) *Process {
 	for _, v := range Processes {
 		if v.ID == id {
-			return &v
+			return v
 		}
 	}
 
@@ -40,7 +40,7 @@ func GetProcessByID(id int) *Process {
 func GetProcessByName(name string) *Process {
 	for _, v := range Processes {
 		if v.Name == name {
-			return &v
+			return v
 		}
 	}
 
@@ -184,9 +184,4 @@ func GetID() int {
 	}
 
 	return id + 1
-}
-
-func RunProcess(proc *Process) {
-	proc.IsRunning = true
-
 }
