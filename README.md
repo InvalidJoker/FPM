@@ -1,6 +1,8 @@
 # FPM (Fast Process Manager)
 
-> This is a work in progress, and is not ready for use.
+> ~~This is a work in progress, and is not ready for use.~~
+> 
+> FPM is taking a huge rewrite.
 
 ## Introduction
 
