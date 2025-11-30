@@ -1,2 +1,19 @@
-[workspace]
-members = ["cli"]
+[package]
+name = "FPM"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+chrono = "0.4.42"
+clap = { version = "4.5.53", features = ["derive", "default"] }
+tokio = { version = "1.47.1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+directories = "6.0.0"
+anyhow = "1.0.100"
+tracing = "0.1.43"
+tracing-subscriber = { version = "0.3.22", features = ["fmt", "env-filter"] }
+
+[dependencies.toml]
+version = "0.9.7"
+features = ["serde", "preserve_order"]

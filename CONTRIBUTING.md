@@ -4,18 +4,13 @@ First off, thank you for taking the time to contribute! 😄
 
 ## Used Stack
 
-### CLI
+### CLI & Backend
 
 - [Rust](https://www.rust-lang.org/)
-
-### Backend
-
-- [Go](https://golang.org/)
 
 ### Frontend
 
 - [Svelte](https://svelte.dev/)
-- [SkeletonUI](https://skeleton.dev/)
 
 ## Contributing
 
